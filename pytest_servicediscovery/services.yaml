@@ -1,0 +1,76 @@
+discovery:
+  providers:
+    - name: consul
+      plugin: consul
+      parameters:
+        - ipAddress: 127.0.0.1
+          port: 8500
+          token: token
+
+    - name: static
+      plugin: static
+      parameters:
+        - ip: localhost
+          port: 8500
+
+        - ip: localhost
+          port: 8501
+
+        - ip: localhost
+          port: 8502
+
+    - name: plaintext
+      plugin: plaintext
+
+    - name: gcs
+      plugin: gcs
+      parameters:
+        - project: project
+          serviceAccountFile: serviceAccountFile
+
+    - name: vault-local
+      plugin: vault
+      parameters:
+        - ipAddress: 127.0.0.1
+          port: 8243
+          scheme: https
+          token: token
+
+    - name: vault-consul
+      plugin: vault-consul
+      parameters:
+        - scheme: https
+          consulProvider: consul
+          serviceName: vault-lb
+          token: token
+
+
+    - name: 'null'
+      plugin: 'null'
+
+
+  services:
+    - name: consul
+      provider: static
+
+      secrets:
+        - name: secret1
+          provider: plaintext
+          parameters:
+            - value: secret1
+
+        - name: secret2
+          provider: gcs
+          parameters:
+            - bucket: bucket
+              object: object.yaml
+
+        - name: secret3
+          provider: vault-local
+          parameters:
+            - object: secret/foo
+
+        - name: secret4
+          provider: vault-consul
+          parameters:
+            - object: secret/foo
