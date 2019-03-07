@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Service & Secret Discovery PyTest Plugin: 3.x</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1551972451759 {padding: 0px;}
+div.rbtoc1551972451759 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1551972451759 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1551972451759'>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>1</span> <a href='#Version:3.x-Configuration'>Configuration</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>1.1</span> <a href='#Version:3.x-Discoveryprovidersconfiguration'>Discovery providers configuration</a></li>
+<li><span class='TOCOutline'>1.2</span> <a href='#Version:3.x-Discoveryservicesconfiguration'>Discovery services configuration</a></li>
+<li><span class='TOCOutline'>1.3</span> <a href='#Version:3.x-Discoverysecretconfiguration'>Discovery secret configuration</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2</span> <a href='#Version:3.x-Providers'>Providers</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.1</span> <a href='#Version:3.x-ServiceDiscoveryProviders'>Service Discovery Providers</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.1.1</span> <a href='#Version:3.x-Consulservicediscoveryprovider'>Consul service discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.1.1.1</span> <a href='#Version:3.x-Exampleconfiguration'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.1.1.2</span> <a href='#Version:3.x-Initialisationparameters'>Initialisation parameters</a></li>
+<li><span class='TOCOutline'>2.1.1.3</span> <a href='#Version:3.x-Plugincallparameters'>Plugin call parameters</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2.1.2</span> <a href='#Version:3.x-Staticservicediscoveryprovider'>Static service discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.1.2.1</span> <a href='#Version:3.x-Exampleconfiguration.1'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.1.2.2</span> <a href='#Version:3.x-Initializationparameters'>Initialization parameters</a></li>
+<li><span class='TOCOutline'>2.1.2.3</span> <a href='#Version:3.x-Plugincallparameters.1'>Plugin call parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2.2</span> <a href='#Version:3.x-SecretDiscoveryProviders'>Secret Discovery Providers</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.2.1</span> <a href='#Version:3.x-Plaintextsecretdiscoveryprovider'>Plaintext secret discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.2.1.1</span> <a href='#Version:3.x-Exampleconfiguration.2'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.2.1.2</span> <a href='#Version:3.x-Initialisationparameters.1'>Initialisation parameters</a></li>
+<li><span class='TOCOutline'>2.2.1.3</span> <a href='#Version:3.x-Plugincallparameters.2'>Plugin call parameters</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2.2.2</span> <a href='#Version:3.x-JKSsecretdiscoveryprovider'>JKS secret discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.2.2.1</span> <a href='#Version:3.x-Exampleconfiguration.3'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.2.2.2</span> <a href='#Version:3.x-Initialisationparameters.2'>Initialisation parameters</a></li>
+<li><span class='TOCOutline'>2.2.2.3</span> <a href='#Version:3.x-Plugincallparameters.3'>Plugin call parameters</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2.2.3</span> <a href='#Version:3.x-GCSsecretdiscoveryprovider'>GCS secret discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.2.3.1</span> <a href='#Version:3.x-Exampleconfiguration.4'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.2.3.2</span> <a href='#Version:3.x-Initialisationparameters.3'>Initialisation parameters</a></li>
+<li><span class='TOCOutline'>2.2.3.3</span> <a href='#Version:3.x-Plugincallparameters.4'>Plugin call parameters</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2.2.4</span> <a href='#Version:3.x-Vaultsecretdiscoveryprovider'>Vault secret discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.2.4.1</span> <a href='#Version:3.x-Exampleconfiguration.5'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.2.4.2</span> <a href='#Version:3.x-Initialisationparameters.4'>Initialisation parameters</a></li>
+<li><span class='TOCOutline'>2.2.4.3</span> <a href='#Version:3.x-Plugincallparameters.5'>Plugin call parameters</a></li>
+<li><span class='TOCOutline'>2.2.4.4</span> <a href='#Version:3.x-Vault-consulsecretdiscoveryprovider'>Vault-consul secret discovery provider</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.2.4.4.1</span> <a href='#Version:3.x-Exampleconfiguration.6'>Example configuration</a></li>
+<li><span class='TOCOutline'>2.2.4.4.2</span> <a href='#Version:3.x-Initialisationparameters,extendsvault'>Initialisation parameters, extends vault</a></li>
+<li><span class='TOCOutline'>2.2.4.4.3</span> <a href='#Version:3.x-Plugincallparameters.6'>Plugin call parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class='TOCOutline'>2.3</span> <a href='#Version:3.x-Dynamicallygeneratedfixtures'>Dynamically generated fixtures</a></li>
+<li><span class='TOCOutline'>2.4</span> <a href='#Version:3.x-Fixtureusing'>Fixture using</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>2.4.1</span> <a href='#Version:3.x-Exampleoutput'>Example output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></p><h1 id="Version:3.x-Configuration">Configuration</h1><p>Configuration example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+    - name: consul-mke
+      plugin: consul
+      parameters:
+        - ipAddress: 10.186.106.5
+          port: 8500
+
+    - name: static
+      plugin: static
+      parameters:
+        - ip: localhost
+          port: 8500
+
+        - ip: localhost
+          port: 8501
+
+    - name: plaintext
+      plugin: plaintext
+
+    - name: gcs
+      plugin: gcs
+
+    - name: vault-local
+      plugin: vault
+      parameters:
+        - ipAddress: 10.186.106.65
+          port: 8243
+          scheme: https
+
+    - name: vault-consul
+      plugin: vault-consul
+      parameters:
+        - scheme: https
+          consulProvider: ca-dev-consul
+          serviceName: vault-lb
+
+
+
+  services:
+    - name: consul
+      provider: consul-mke
+      parameters:
+        - serviceName: consul
+
+      secrets:
+        - name: secret1
+          provider: plaintext
+          parameters:
+            - value: secret1
+
+        - name: secret2
+          provider: gcs
+          parameters:
+            - bucket: secrets
+              object: ca-dev-endpoints.yaml
+
+        - name: secret3
+          provider: vault-local
+          parameters:
+            - object: secret/foo
+
+        - name: secret4
+          provider: vault-consul
+          parameters:
+            - object: secret/foo</pre>
+</div></div><h2 id="Version:3.x-Discoveryprovidersconfiguration"><br/>Discovery p<span>roviders</span> configuration</h2><p>Providers - the list of configured providers.</p><p><br/></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">Name</td><td class="confluenceTd">Provider name</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">providers:
+      - name: consul
+        ...</pre>
+</div></div></div></td></tr><tr><td class="confluenceTd">Plugin</td><td class="confluenceTd">The reference to the plugin name that implements service/secret discovery logic</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">providers:
+      - name: consul
+        plugin: consul
+        ...</pre>
+</div></div></div></td></tr><tr><td colspan="1" class="confluenceTd">Parameters (Optional)</td><td colspan="1" class="confluenceTd">Plugin input parameters. Plugin initialization parameters</td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">providers:
+      - name: consul
+        plugin: consul
+        parameters:
+          - ipAddress: 10.186.106.5
+            port: 8500</pre>
+</div></div></div></td></tr></tbody></table></div><p><br/></p><h2 id="Version:3.x-Discoveryservicesconfiguration"><span>Discovery services</span><span> configuration</span></h2><p>Services - the list of configured services what we’re wanted to work with.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">Name</td><td class="confluenceTd">The name. This is how service object would be named/accessible in tests. This is a fixture name</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">services:
+    - name: ...
+    - name: ...
+    - name: ...
+
+</pre>
+</div></div><p><br/></p><br/><p><br/></p></div></td></tr><tr><td class="confluenceTd">Provider</td><td class="confluenceTd">The reference to service discovery provider name</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">services:
+    - name: service1
+      provider: consul
+      ...
+
+    - name: service2
+      provider: static
+      ...</pre>
+</div></div></div></td></tr><tr><td class="confluenceTd">Parameters</td><td class="confluenceTd">Service discovery provider plugin input parameters. Provider plugin call parameters.</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">services:
+    - name: service1
+      provider: consul
+      parameters:
+        - serviceName: consul</pre>
+</div></div></div></td></tr></tbody></table></div><p><span><br/></span></p><h2 id="Version:3.x-Discoverysecretconfiguration">Discovery secret configuration</h2><p>Secrets - the list of configured secrets.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><span>Field</span></th><th class="confluenceTh"><span>Description</span></th><th class="confluenceTh"><span>Example</span></th></tr><tr><td class="confluenceTd">Name</td><td class="confluenceTd"><span><span style="color: rgb(89,89,89);">The name. This is how secret object would be named in tests in a fixture object</span></span></td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">      ...
+      secrets:
+        - name: secret1
+          ...
+
+        - name: secret2
+          ...
+
+        - name: secret3
+          ...
+</pre>
+</div></div></div></td></tr><tr><td class="confluenceTd">Provider</td><td class="confluenceTd">The reference to secret discovery provider name</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">      ...
+      secrets:
+        - name: secret1
+          provider: plaintext
+          ...
+
+        - name: secret2
+          provider: plaintext
+          ...
+
+        - name: secret3
+          provider: plaintext
+          ...
+</pre>
+</div></div></div></td></tr><tr><td class="confluenceTd">Parameters</td><td class="confluenceTd">Secret discovery provider plugin input parameters. Plugin call parameters</td><td class="confluenceTd"><div class="content-wrapper"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">      ...
+      secrets:
+        - name: secret1
+          provider: plaintext
+          parameters:
+            - value: some-secret-value1
+
+        - name: secret2
+          provider: plaintext
+          parameters:
+            - value: some-secret-value2
+
+        - name: secret3
+          provider: plaintext
+          parameters:
+            - value: some-secret-value3
+</pre>
+</div></div></div></td></tr></tbody></table></div><p><a href="#Version:3.x-prov-type-to-prov-name-mapping">See useful link.</a></p><h1 id="Version:3.x-Providers">Providers</h1><h2 id="Version:3.x-ServiceDiscoveryProviders">Service Discovery Providers</h2><h3 id="Version:3.x-Consulservicediscoveryprovider">Consul service discovery provider</h3><p>Consul service discovery provider used to discover service addresses from consul service catalog.</p><h4 id="Version:3.x-Exampleconfiguration">Example configuration</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+      - name: consul
+        plugin: consul
+        parameters:
+          - ipAddress: 10.186.106.5
+            port: 8500
+            token: token
+
+  services:
+    - name: consul
+      provider: consul
+      parameters:
+        - serviceName: consul
+          tag: primary
+          near: node-name</pre>
+</div></div><p><br/></p><h4 id="Version:3.x-Initialisationparameters">Initialisation parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">ipAddress</td><td class="confluenceTd">IP Address or Domain name of consul address</td><td class="confluenceTd">10.186.106.5</td></tr><tr><td class="confluenceTd">port</td><td class="confluenceTd">Port number <span>of consul address</span></td><td class="confluenceTd">8500</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">Token to use for discovery request</td><td colspan="1" class="confluenceTd">token</td></tr></tbody></table></div><p><br/></p><h4 id="Version:3.x-Plugincallparameters">Plugin call parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><span>Field</span></th><th class="confluenceTh"><span>Description</span></th><th class="confluenceTh"><span>Example</span></th></tr><tr><td class="confluenceTd">serviceName</td><td class="confluenceTd">The service name to discover in consul provider</td><td class="confluenceTd">consul</td></tr><tr><td class="confluenceTd">tag</td><td class="confluenceTd">Specifies the tag to filter on</td><td class="confluenceTd">primary</td></tr><tr><td class="confluenceTd">near</td><td class="confluenceTd">Specifies a node name to sort the node list in ascending order based on the estimated round trip time from that node</td><td class="confluenceTd">node-name</td></tr></tbody></table></div><p><br/></p><h3 id="Version:3.x-Staticservicediscoveryprovider">Static service discovery provider</h3><p>Static service discovery provider used to discover service addresses from statically configured address and port.</p><h4 id="Version:3.x-Exampleconfiguration.1">Example configuration</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+      - name: static
+        type: static
+		parameters:
+		  - ip: localhost
+		    port: 8500
+
+		  - ip: localhost
+		    port: 8501
+
+  services:
+    - name: consul
+      provider: static
+</pre>
+</div></div><p><br/></p><h4 id="Version:3.x-Initializationparameters">Initialization parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable" style="letter-spacing: 0.0px;"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">ip</td><td class="confluenceTd">IP Address or Domain name of service address</td><td class="confluenceTd">localhost</td></tr><tr><td class="confluenceTd">port</td><td class="confluenceTd">Service port number</td><td class="confluenceTd">8500</td></tr></tbody></table></div><h4 id="Version:3.x-Plugincallparameters.1"><br/>Plugin call parameters</h4><p>None</p><h2 id="Version:3.x-SecretDiscoveryProviders">Secret Discovery Providers</h2><h3 id="Version:3.x-Plaintextsecretdiscoveryprovider">Plaintext secret discovery provider</h3><p>Plaintext secret discovery provider used to discover secret from statically configured secrets</p><h4 id="Version:3.x-Exampleconfiguration.2">Example configuration</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+    - name: plaintext
+      type: plaintext
+
+  services:
+    - name: ...
+      secrets:
+        - name: secret1
+          provider: plaintext
+          parameters:
+            - value: secret1-value
+</pre>
+</div></div><p><br/></p><h4 id="Version:3.x-Initialisationparameters.1">Initialisation parameters</h4><p>None</p><h4 id="Version:3.x-Plugincallparameters.2">Plugin call parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">value</td><td class="confluenceTd">The service name to discover in consul provider</td><td class="confluenceTd">secret1-value</td></tr></tbody></table></div><p><br/></p><h3 id="Version:3.x-JKSsecretdiscoveryprovider">JKS secret discovery provider</h3><p>Allows an operator to specify a jks-keystore for the tests to load CA certificates from. Return value is a string that contains all of the found certificates concatenated.</p><h4 id="Version:3.x-Exampleconfiguration.3">Example configuration</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+    - name: jks	
+      plugin: jks
+      parameters:
+        - passphrase: &quot;forgetit&quot;
+          jksFile: &quot;/etc/pki/java/cacerts&quot;
+
+  services:
+    - name: kafka
+      provider: consul
+      parameters:
+        - serviceName: et_myapp_kafka
+      
+          secrets:
+            - name: ssl_cadata
+              provider: jks
+              parameters:
+                - keyAlias: &quot;&quot;
+                  keyPassword: &quot;&quot;
+                  type: &quot;ca&quot;
+</pre>
+</div></div><p><br/></p><h4 id="Version:3.x-Initialisationparameters.2">Initialisation parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">passphrase (required)</td><td class="confluenceTd">Keystore password</td><td class="confluenceTd">forgetit</td></tr><tr><td colspan="1" class="confluenceTd">jksFile (required)</td><td colspan="1" class="confluenceTd">Keystore filename</td><td colspan="1" class="confluenceTd">/etc/pki/java/cacerts</td></tr></tbody></table></div><h4 id="Version:3.x-Plugincallparameters.3">Plugin call parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 74.0px;"/><col style="width: 277.0px;"/><col style="width: 80.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">keyAlias</td><td class="confluenceTd">Alias for the stored key or certificate</td><td class="confluenceTd">caroot</td></tr><tr><td colspan="1" class="confluenceTd">keyPassword</td><td colspan="1" class="confluenceTd">Password for the private key</td><td colspan="1" class="confluenceTd"><span>forgetit</span></td></tr><tr><td colspan="1" class="confluenceTd">type</td><td colspan="1" class="confluenceTd">Specify what to extract - ca, cert or key</td><td colspan="1" class="confluenceTd">ca</td></tr></tbody></table></div><h3 id="Version:3.x-GCSsecretdiscoveryprovider">GCS secret discovery provider</h3><p>Google Cloud Storage secret provider.</p><h4 id="Version:3.x-Exampleconfiguration.4">Example configuration</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+	- name: gcs
+	  plugin: gcs
+
+  services:
+    - name: ...
+      secrets:
+		- name: secret
+		  provider: gcs
+		  parameters:
+		    - bucket: secrets
+		      object: ca-dev-endpoints.yaml
+</pre>
+</div></div><p><br/></p><h4 id="Version:3.x-Initialisationparameters.3">Initialisation parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">project (optional)</td><td class="confluenceTd">The project which the client acts on behalf of</td><td class="confluenceTd">kos-cicd</td></tr><tr><td colspan="1" class="confluenceTd">serviceAccountFile<span> (optional)</span></td><td colspan="1" class="confluenceTd">The path to the service account json file</td><td colspan="1" class="confluenceTd">./service-account.json</td></tr></tbody></table></div><h4 id="Version:3.x-Plugincallparameters.4">Plugin call parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">bucket</td><td class="confluenceTd">The bucket name</td><td class="confluenceTd">secrets</td></tr><tr><td colspan="1" class="confluenceTd">object</td><td colspan="1" class="confluenceTd">The object path</td><td colspan="1" class="confluenceTd">ca-dev-endpoints.yaml</td></tr></tbody></table></div><h3 id="Version:3.x-Vaultsecretdiscoveryprovider">Vault secret discovery provider</h3><p>Vault secret provider.</p><h4 id="Version:3.x-Exampleconfiguration.5">Example configuration</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+	- name: vault
+	  plugin: vault
+	  parameters:
+	    - ipAddress: 10.186.106.65
+	      port: 8243
+	      scheme: https
+	      token: token
+
+  services:
+    - name: ...
+      secrets:
+		- name: secret
+		  provider: vault
+		  parameters:
+		    - object: secret/foo
+</pre>
+</div></div><p><br/></p><h4 id="Version:3.x-Initialisationparameters.4">Initialisation parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">ipAddress</td><td class="confluenceTd">Vault <span>ipAddress</span></td><td class="confluenceTd">10.186.106.65</td></tr><tr><td colspan="1" class="confluenceTd">port</td><td colspan="1" class="confluenceTd"><span>Vault port</span></td><td colspan="1" class="confluenceTd">8200</td></tr><tr><td colspan="1" class="confluenceTd">scheme</td><td colspan="1" class="confluenceTd">HTTPS or HTTPS</td><td colspan="1" class="confluenceTd">https</td></tr><tr><td colspan="1" class="confluenceTd">namespace</td><td colspan="1" class="confluenceTd">Vault <span>namespace</span></td><td colspan="1" class="confluenceTd">ns1</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">Vault token</td><td colspan="1" class="confluenceTd">token</td></tr></tbody></table></div><h4 id="Version:3.x-Plugincallparameters.5">Plugin call parameters</h4><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td colspan="1" class="confluenceTd">object</td><td colspan="1" class="confluenceTd">The object path</td><td colspan="1" class="confluenceTd">secret/foo</td></tr></tbody></table></div><p><br/></p><h4 id="Version:3.x-Vault-consulsecretdiscoveryprovider">Vault-consul secret discovery provider</h4><p>Vault-consul secret provider extends vault provider with discovery address from consul</p><h5 id="Version:3.x-Exampleconfiguration.6">Example configuration</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">discovery:
+  providers:
+	- name: consul
+	  plugin: consul
+	  parameters:
+    	- ipAddress: 10.186.106.100
+	      port: 8500
+   		  token: token
+
+	- name: vault-consul
+	  plugin: vault-consul
+	  parameters:
+   	 	- scheme: https
+	      consulProvider: consul
+	      serviceName: vault-lb
+	      token: token
+
+  services:
+    - name: ...
+      secrets:
+		- name: secret
+		  provider: vault-consul
+		  parameters:
+		    - object: secret/foo
+</pre>
+</div></div><p><br/></p><h5 id="Version:3.x-Initialisationparameters,extendsvault">Initialisation parameters, extends vault</h5><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td colspan="1" class="confluenceTd">consulProvider</td><td colspan="1" class="confluenceTd">Reference to consul provider name. Where discover vault serviceName</td><td colspan="1" class="confluenceTd">consul</td></tr><tr><td colspan="1" class="confluenceTd">serviceName</td><td colspan="1" class="confluenceTd">The vault service name</td><td colspan="1" class="confluenceTd">vault-lb</td></tr></tbody></table></div><h5 id="Version:3.x-Plugincallparameters.6">Plugin call parameters</h5><p>The same as vault.</p><h2 id="Version:3.x-Dynamicallygeneratedfixtures">Dynamically generated fixtures</h2><p>We're make it easy to combine factory approach to the test setup with the dependency injection, heart of the pytest fixtures.</p><p>Every service name in the configuration will be registered as a fixture using ServiceFixtureFactory model.</p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: py; gutter: false; theme: Confluence" data-theme="Confluence">class ServiceFixtureFactory(factory.Factory):
+    class Meta(object):
+        model = ServiceFixture
+
+
+class ServiceModel(Model):
+    name = StringType(required=True)
+    address = ModelType(Address, required=True)
+    addresses = ListType(ModelType(Address), required=True)
+    secrets = DictType(StringType)
+    health_checks = ModelType(HealthChecks)
+
+
+class ServiceFixture(ServiceModel):
+   ...
+</pre>
+</div></div><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><span>Field</span></th><th class="confluenceTh"><span>Description</span></th></tr><tr><td class="confluenceTd">name</td><td class="confluenceTd">The service name</td></tr><tr><td class="confluenceTd">address</td><td class="confluenceTd"><span>The service address (ip, port)</span></td></tr><tr><td colspan="1" class="confluenceTd">addresses</td><td colspan="1" class="confluenceTd">The list of <span>service addresses</span></td></tr><tr><td colspan="1" class="confluenceTd">secrets</td><td colspan="1" class="confluenceTd"><span>The dict of secrets</span></td></tr><tr><td colspan="1" class="confluenceTd">health_checks</td><td colspan="1" class="confluenceTd"><span>The list of </span><span>service <span>health-checks results</span></span></td></tr></tbody></table></div><p><br/></p><h2 id="Version:3.x-Fixtureusing">Fixture using</h2><p>Define service name in configuration and just start using fixture in a pytest standard ways - pass fixture (service name) to yours test suites.</p><p><br/></p><p><span><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" src="https://lh6.googleusercontent.com/14zlqDRPfKMvAJ1SUCkH_OLABIsxLYuItrnXAQS9yLugvpu13HR1JOwYXnNfhzG1J5hsMg8KI3h755NSCCsZnCMA5wCG4ZP7Kc2UW0u0JFtap7dofXuF8i5kjcsZmfLHswufGYdgeVA" data-image-src="https://lh6.googleusercontent.com/14zlqDRPfKMvAJ1SUCkH_OLABIsxLYuItrnXAQS9yLugvpu13HR1JOwYXnNfhzG1J5hsMg8KI3h755NSCCsZnCMA5wCG4ZP7Kc2UW0u0JFtap7dofXuF8i5kjcsZmfLHswufGYdgeVA"></span></span></p><p><br/></p><h3 id="Version:3.x-Exampleoutput">Example output</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ServiceFixture(
+secrets={u&#39;token&#39;: u&#39;&#39;}, 
+addresses=[
+    Address(ip=10.186.106.103, port=8300),
+    Address(ip=10.186.106.102, port=8300),
+    Address(ip=10.186.106.104, port=8300)
+], 
+health_checks=HealthChecks(checks=[
+    HealthCheck(node=consul-0b4h, name=Serf Health Status, status=passing, output=Agent alive and reachable, id=serfHealth),
+    HealthCheck(node=consul-4fxv, name=Serf Health Status, status=passing, output=Agent alive and reachable, id=serfHealth),
+    HealthCheck(node=consul-wpsq, name=Serf Health Status, status=passing, output=Agent alive and reachable, id=serfHealth)
+]),
+address=Address(ip=10.186.106.103, port=8300), 
+name=consul)
+
+</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div>
+        </div>     </body>
+</html>
