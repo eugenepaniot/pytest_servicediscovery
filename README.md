@@ -6,6 +6,7 @@ Configuration
 
 Configuration example:
 
+```
 discovery:
   providers:
     - name: consul-mke
@@ -72,6 +73,7 @@ discovery:
           provider: vault-consul
           parameters:
             - object: secret/foo
+```
 
 
 Discovery providers configuration
@@ -107,13 +109,14 @@ providers:
 Parameters (Optional)
 
 Plugin input parameters. Plugin initialization parameters
-
+```
 providers:
       - name: consul
         plugin: consul
         parameters:
           - ipAddress: 10.186.106.5
             port: 8500
+```
 
   
 
@@ -146,7 +149,7 @@ services:
 Provider
 
 The reference to service discovery provider name
-
+```
 services:
     - name: service1
       provider: consul
@@ -155,17 +158,17 @@ services:
     - name: service2
       provider: static
       ...
-
+```
 Parameters
 
 Service discovery provider plugin input parameters. Provider plugin call parameters.
-
+```
 services:
     - name: service1
       provider: consul
       parameters:
         - serviceName: consul
-
+```
   
 
 Discovery secret configuration
@@ -182,7 +185,7 @@ Example
 Name
 
 The name. This is how secret object would be named in tests in a fixture object
-
+```
       ...
       secrets:
         - name: secret1
@@ -193,11 +196,11 @@ The name. This is how secret object would be named in tests in a fixture object
 
         - name: secret3
           ...
-
+```
 Provider
 
 The reference to secret discovery provider name
-
+```
       ...
       secrets:
         - name: secret1
@@ -211,11 +214,12 @@ The reference to secret discovery provider name
         - name: secret3
           provider: plaintext
           ...
+```
 
 Parameters
 
 Secret discovery provider plugin input parameters. Plugin call parameters
-
+```
       ...
       secrets:
         - name: secret1
@@ -232,7 +236,7 @@ Secret discovery provider plugin input parameters. Plugin call parameters
           provider: plaintext
           parameters:
             - value: some-secret-value3
-
+```
 
 Providers
 =========
@@ -245,7 +249,7 @@ Service Discovery Providers
 Consul service discovery provider used to discover service addresses from consul service catalog.
 
 #### Example configuration
-
+```
 discovery:
   providers:
       - name: consul
@@ -262,7 +266,7 @@ discovery:
         - serviceName: consul
           tag: primary
           near: node-name
-
+```
   
 
 #### Initialisation parameters
@@ -326,7 +330,7 @@ node-name
 Static service discovery provider used to discover service addresses from statically configured address and port.
 
 #### Example configuration
-
+```
 discovery:
   providers:
       - name: static
@@ -341,7 +345,7 @@ discovery:
   services:
     - name: consul
       provider: static
-
+```
   
 
 #### Initialization parameters
@@ -377,7 +381,7 @@ Secret Discovery Providers
 Plaintext secret discovery provider used to discover secret from statically configured secrets
 
 #### Example configuration
-
+```
 discovery:
   providers:
     - name: plaintext
@@ -390,7 +394,7 @@ discovery:
           provider: plaintext
           parameters:
             - value: secret1-value
-
+```
   
 
 #### Initialisation parameters
@@ -418,7 +422,7 @@ secret1-value
 Allows an operator to specify a jks-keystore for the tests to load CA certificates from. Return value is a string that contains all of the found certificates concatenated.
 
 #### Example configuration
-
+```
 discovery:
   providers:
     - name: jks	
@@ -440,7 +444,7 @@ discovery:
                 - keyAlias: ""
                   keyPassword: ""
                   type: "ca"
-
+```
   
 
 #### Initialisation parameters
@@ -494,7 +498,7 @@ ca
 Google Cloud Storage secret provider.
 
 #### Example configuration
-
+```
 discovery:
   providers:
 	- name: gcs
@@ -506,9 +510,9 @@ discovery:
 		- name: secret
 		  provider: gcs
 		  parameters:
-		    - bucket: secrets
-		      object: ca-dev-endpoints.yaml
-
+		    - bucket: bucket
+		      object: object.yaml
+```
   
 
 #### Initialisation parameters
@@ -556,7 +560,7 @@ ca-dev-endpoints.yaml
 Vault secret provider.
 
 #### Example configuration
-
+```
 discovery:
   providers:
 	- name: vault
@@ -574,7 +578,7 @@ discovery:
 		  provider: vault
 		  parameters:
 		    - object: secret/foo
-
+```
   
 
 #### Initialisation parameters
@@ -636,7 +640,7 @@ secret/foo
 Vault-consul secret provider extends vault provider with discovery address from consul
 
 ##### Example configuration
-
+```
 discovery:
   providers:
 	- name: consul
@@ -662,7 +666,7 @@ discovery:
 		  parameters:
 		    - object: secret/foo
 
-  
+```
 
 ##### Initialisation parameters, extends vault
 
@@ -696,7 +700,7 @@ We're make it easy to combine factory approach to the test setup with the depend
 Every service name in the configuration will be registered as a fixture using ServiceFixtureFactory model.
 
   
-
+```
 class ServiceFixtureFactory(factory.Factory):
     class Meta(object):
         model = ServiceFixture
@@ -712,6 +716,7 @@ class ServiceModel(Model):
 
 class ServiceFixture(ServiceModel):
    ...
+```
 
 Field
 
@@ -748,6 +753,7 @@ Define service name in configuration and just start using fixture in a pytest st
 
 ### Example output
 
+```
 ServiceFixture(
 secrets={u'token': u''}, 
 addresses=\[
@@ -762,3 +768,4 @@ health\_checks=HealthChecks(checks=\[
 \]),
 address=Address(ip=10.186.106.103, port=8300), 
 name=consul)
+```
