@@ -43,7 +43,7 @@ setuptools.setup(
                       'google-cloud-storage==1.13.2',
                       'google-resumable-media==0.3.2',
                       'more-itertools==5.0.0',
-                      'validators==0.12.4'],
+                      'validators==0.12.6'],
 
     zip_safe=False,
     platforms='any',
