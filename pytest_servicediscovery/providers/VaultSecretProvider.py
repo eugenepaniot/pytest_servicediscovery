@@ -8,6 +8,9 @@ from pytest_servicediscovery.models.configuration.ProviderContainerMixin import 
 from pytest_servicediscovery.models.types import IPAddressOrDomainType
 from pytest_servicediscovery.providers import ProviderManager
 from pytest_servicediscovery.providers.BaseSecretPluginProvider import BaseSecretPluginProvider
+import sys
+if sys.version_info.major == 3:
+    unicode = str
 
 
 class VaultSecretProviderConfiguration(PluginConfiguration):

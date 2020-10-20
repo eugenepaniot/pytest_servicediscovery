@@ -1,5 +1,9 @@
+import logging
+
 import yaml
 from yaml.constructor import ConstructorError
+
+logging.getLogger('faker').setLevel(logging.ERROR)
 
 
 def no_duplicates_constructor(loader, node, deep=False):

@@ -5,6 +5,9 @@ from schematics.types import StringType, DictType
 import validators
 
 from pytest_servicediscovery.exceptions import DuplicateSecret, SecretNotFoundException
+import sys
+if sys.version_info.major == 3:
+    unicode = str
 
 
 class IPAddressOrDomainType(StringType):

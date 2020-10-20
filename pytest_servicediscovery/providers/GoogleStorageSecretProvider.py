@@ -1,4 +1,5 @@
 import os
+from functools import lru_cache
 
 import google
 
@@ -11,6 +12,9 @@ from pytest_servicediscovery.decorators import logthis
 from pytest_servicediscovery.models.Null import NullProviderCfg
 from pytest_servicediscovery.models.configuration.ProviderContainerMixin import ProviderParameters
 from pytest_servicediscovery.providers.BaseSecretPluginProvider import BaseSecretPluginProvider
+import sys
+if sys.version_info.major == 3:
+    unicode = str
 
 
 class GoogleStorageSecretProvideConfiguration(NullProviderCfg):
@@ -69,6 +73,7 @@ class GoogleStorageSecretProvider(BaseSecretPluginProvider):
 
     @property
     @logthis()
+    @lru_cache
     def value(self):
         """value property
 

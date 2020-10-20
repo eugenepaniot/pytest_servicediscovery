@@ -30,7 +30,7 @@ class ProviderContainerMixin(Model):
         except (UnknownFieldError, KeyError):
             pass
 
-        return super(ProviderContainerMixin, cls).__new__(pmclass, raw_data, *args, **kwargs)
+        return super(ProviderContainerMixin, cls).__new__(pmclass)
 
 
 class ProviderParameters(ProviderContainerMixin):

@@ -2,6 +2,7 @@ import logging
 import os
 import pkgutil
 import pprint
+import warnings
 
 import pytest
 import yaml
@@ -16,6 +17,8 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 registered_services = dict()
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 class Iters(object):

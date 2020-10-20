@@ -17,6 +17,6 @@ class ServiceFixtureFactory(factory.Factory):
     @factory.post_generation
     def post(svc, *args, **kwargs):
         log = logging.getLogger(__name__)
-        log.setLevel(logging.DEBUG)
+        log.setLevel(logging.INFO)
 
         log.info("Fixture \"%s\" requested" % svc.name)

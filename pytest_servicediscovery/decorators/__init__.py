@@ -17,7 +17,7 @@ def logthis(level=None, sensitive=False):
             ret = fn(*arg, **kwargs)
             log.log(level,
                     "Called function '%s.%s(arg=%r, kwargs=%r), got return value: %r",
-                    fn.__module__, fn.func_name, arg, kwargs, crop_sensitive_data(ret, 0.1))
+                    fn.__module__, fn.__name__, arg, kwargs, crop_sensitive_data(ret, 0.1))
 
             return ret
         return _decorated

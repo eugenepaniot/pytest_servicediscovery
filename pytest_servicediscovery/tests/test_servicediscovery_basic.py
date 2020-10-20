@@ -7,7 +7,6 @@
 #
 # """
 import logging
-
 import allure
 from hamcrest import assert_that, equal_to_ignoring_case
 

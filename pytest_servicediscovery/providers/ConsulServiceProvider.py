@@ -146,7 +146,7 @@ class ConsulServiceProviderClass(BaseServicePluginProvider):
                 [
                   {
                     "ID": "0dfaa9e2-a79f-8c61-3e6c-59352d1c8b9c",
-                    "Node": "ip-172.22.1.93.eu-west-1.compute.internalaws.griddynamics.netvm",
+                    "Node": "ip-172.22.1.93.eu-west-1.compute",
                     "Address": "172.22.1.93",
                     "Datacenter": "dc1",
                     "TaggedAddresses": {

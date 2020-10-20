@@ -47,12 +47,12 @@ def secrets_access_check_servicediscovery():
                         
                         - name: plaintext
                           plugin: plaintext
-                          
+
                       services:
                         - name: test
                           provider: static_secrets_access_check_servicediscovery
                           parameters: []
-                          
+
                           secrets:
                             - name: secret1
                               provider: plaintext

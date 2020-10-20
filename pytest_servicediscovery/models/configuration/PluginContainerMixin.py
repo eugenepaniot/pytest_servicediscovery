@@ -30,7 +30,7 @@ class PluginContainerMixin(Model):
         except (UnknownFieldError, KeyError):
             pass
 
-        return super(PluginContainerMixin, cls).__new__(pmclass, raw_data, *args, **kwargs)
+        return super(PluginContainerMixin, cls).__new__(pmclass)
 
 
 class PluginConfiguration(PluginContainerMixin):
